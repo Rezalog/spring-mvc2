@@ -130,4 +130,34 @@ public class BasicController {
 
         return "basic/link";
     }
+
+    /**
+     * 타임리프는 다음과 같은 리터럴이 있다.
+     * 문자: 'hello'
+     * 숫자: 10
+     * 불린: true , false
+     * null: null
+     * 타임리프에서 문자 리터럴은 항상 ' (작은 따옴표)로 감싸야 한다.
+     * <span th:text="'hello'">
+     * 그런데 문자를 항상 ' 로 감싸는 것은 너무 귀찮은 일이다. 공백 없이 쭉 이어진다면 하나의 의미있는 토큰으로 인지해
+     * 서 다음과 같이 작은 따옴표를 생략할 수 있다.
+     * 룰: A-Z , a-z , 0-9 , [] , . , - , _
+     * <span th:text="hello">
+     */
+    @GetMapping("/literal")
+    public String literal(Model model) {
+        model.addAttribute("data", "Spring!");
+        return "basic/literal";
+    }
+
+    @GetMapping("/operation")
+    public String operation(Model model) {
+        model.addAttribute("data", "Spring");
+        return "basic/operation";
+    }
+
+    @GetMapping("/attribute")
+    public String attribute() {
+        return "basic/attribute";
+    }
 }
