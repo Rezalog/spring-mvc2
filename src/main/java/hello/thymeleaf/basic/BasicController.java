@@ -168,6 +168,12 @@ public class BasicController {
         return "basic/each";
     }
 
+    @GetMapping("/condition")
+    public String condition(Model model) {
+        addUsers(model);
+        return "basic/condition";
+    }
+
     private static void addUsers(Model model) {
         List<User> list = new ArrayList<>();
         list.add(new User("userA", 10));
@@ -175,4 +181,11 @@ public class BasicController {
         list.add(new User("userC", 30));
         model.addAttribute("users", list);
     }
+
+    @GetMapping("/comments")
+    public String comments(Model model) {
+        model.addAttribute("data", "Spring!");
+        return "basic/comments";
+    }
+
 }
