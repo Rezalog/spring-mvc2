@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @RequiredArgsConsturctor : 아래 1,2 와 같음(itemRepository Bean 등록, 생성자 주입
@@ -45,6 +47,22 @@ import java.util.List;
 public class BasicItemController {
 
     private final ItemRepository itemRepository;
+
+    /**
+     * @ModelAttribute
+     * 일반적으로 사용되는 ModelAttribute 와 성격이 다르고,
+     * BasicItemController 에서 request 가 수행될 때마다 속성인 regions 를 key 로 return 된 값이 value 로 담기게 된다.
+     *
+     * 이 경우 최적화를 위해 regions 의 내용이 변하지 않으면 static 한 공간에 넣고 쓰는 것이 좋음(큰 성능 차이는 딱히 없음)
+     * */
+    @ModelAttribute("regions")
+    public Map<String, String> regions() {
+        Map<String, String> regions = new LinkedHashMap<>(); // 순서 보장을 위한 linkedHashMap 사용
+        regions.put("SEOUL", "서울");
+        regions.put("BUSAN", "부산");
+        regions.put("JEJU", "제주");
+        return regions;
+    }
 
     @GetMapping
     public String items(Model model) {
@@ -99,6 +117,7 @@ public class BasicItemController {
         itemRepository.update(itemId, item);
         return "redirect:/basic/items/{itemId}";
     }
+
 
     /**
      * 테스트용 데이터
