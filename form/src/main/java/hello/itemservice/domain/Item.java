@@ -2,6 +2,8 @@ package hello.itemservice.domain;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data // 실무에서는 @Getter @Setter 등으로 분리하는 것이 좋음, 위험함
 public class Item {
 
@@ -9,6 +11,10 @@ public class Item {
     private String itemName;
     private Integer price; // wrapper class for nullable
     private Integer quantity; // wrapper class for nullable
+
+    private Boolean open; // 판매 여부
+    private List<String> regions; // 등록 지역
+    private ItemType itemType; // 상품 종류
 
     public Item() {
     }
