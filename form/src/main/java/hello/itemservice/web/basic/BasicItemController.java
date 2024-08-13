@@ -4,6 +4,7 @@ import hello.itemservice.domain.Item;
 import hello.itemservice.domain.ItemRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,7 @@ import java.util.List;
  * ```
  * */
 
+@Slf4j
 @Controller
 @RequestMapping("/basic/items")
 @RequiredArgsConstructor
@@ -71,11 +73,13 @@ public class BasicItemController {
      * redirectAttribute
      * - {itemId} : addAttribute 한 이름으로 savedItem.getId() 치환
      * - status : parameter 형식으로 붙고, true 면 save 처리 후에 전달하는 개념
-     *   ex) /basic/items/1?status=true
-     *   -> 리다이렉트 된 페이지에 ${param.status} 로 반환 가능
-     * */
+     * ex) /basic/items/1?status=true
+     * -> 리다이렉트 된 페이지에 ${param.status} 로 반환 가능
+     */
     @PostMapping("/add")
     public String save(Item item, RedirectAttributes redirectAttributes) {
+        log.info("item.open={}", item.getOpen());
+
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
