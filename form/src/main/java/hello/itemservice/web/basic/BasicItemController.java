@@ -1,5 +1,6 @@
 package hello.itemservice.web.basic;
 
+import hello.itemservice.domain.DeliveryCode;
 import hello.itemservice.domain.Item;
 import hello.itemservice.domain.ItemRepository;
 import hello.itemservice.domain.ItemType;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +71,16 @@ public class BasicItemController {
     public ItemType[] itemTypes() {
         return ItemType.values();
     }
+
+    @ModelAttribute("deliveryCode")
+    public List<DeliveryCode> deliveryCodes() {
+        List<DeliveryCode> deliveryCodes = new ArrayList<>();
+        deliveryCodes.add(new DeliveryCode("FAST", "빠른 배송"));
+        deliveryCodes.add(new DeliveryCode("NORMAL", "일반 배송"));
+        deliveryCodes.add(new DeliveryCode("SLOW", "느린 배송"));
+        return deliveryCodes;
+    }
+
 
     @GetMapping
     public String items(Model model) {
