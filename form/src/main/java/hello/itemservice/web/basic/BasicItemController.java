@@ -2,6 +2,7 @@ package hello.itemservice.web.basic;
 
 import hello.itemservice.domain.Item;
 import hello.itemservice.domain.ItemRepository;
+import hello.itemservice.domain.ItemType;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -62,6 +63,11 @@ public class BasicItemController {
         regions.put("BUSAN", "부산");
         regions.put("JEJU", "제주");
         return regions;
+    }
+
+    @ModelAttribute("itemTypes")
+    public ItemType[] itemTypes() {
+        return ItemType.values();
     }
 
     @GetMapping
