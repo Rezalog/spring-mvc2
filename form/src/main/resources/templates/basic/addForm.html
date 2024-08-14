@@ -63,6 +63,11 @@
         log.info("item.open={}", item.getOpen())
         -->
 
+        <!--
+        ${regions} : BaseController.@ModelAttribute("regions") 처리 메소드 return 값
+        *{regions} : 상위 th:object 인 item 의 하위 프로퍼티, ${item.regions}
+        #ids.prev, #ids.next : html 태그의 id 프로퍼티의 중복방지를 위해 제공하는 유틸(regions1, regions2, ...)
+        -->
         <div>
             <div>등록 지역</div>
             <div th:each="region : ${regions}" class="form-check form-check-inline">
